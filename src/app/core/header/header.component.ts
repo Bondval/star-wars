@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  @Input() isBackButton = false;
 
-  constructor() { }
+  constructor(
+    private location: Location
+  ) { }
+
+  toPreviousPage = () => this.location.back();
 
   ngOnInit(): void {
   }

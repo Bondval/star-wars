@@ -1,4 +1,7 @@
 <mat-toolbar color="primary">
+  <span *ngIf="isBackButton">
+    <span (click)="toPreviousPage()"><-</span>
+  </span>
   <span>Star wars</span>
 </mat-toolbar>
 
