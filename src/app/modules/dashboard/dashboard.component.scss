@@ -1,0 +1,11 @@
+.planets{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  &__item{
+    margin-bottom: 10px;
+    width: 33%;
+    height: 100px;
+    background: aqua;
+  }
+}

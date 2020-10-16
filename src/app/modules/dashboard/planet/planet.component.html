@@ -1,2 +1,22 @@
 <app-header [isBackButton]="true"></app-header>
-<p>planet works!</p>
+<ng-container *ngIf="planetData$ | async as planetData">
+  <div class="planet-details">
+    <div class="planet-details__item">
+      <p>name</p>
+      <span>{{planetData.planet.name}}</span>
+    </div>
+    <div class="planet-details__item"><p>rotation period</p> <span>{{planetData.planet.rotation_period}}</span></div>
+    <div class="planet-details__item"><p>diameter</p> <span>{{planetData.planet.diameter}}</span></div>
+    <div class="planet-details__item"><p>climate</p> <span>{{planetData.planet.climate}}</span></div>
+    <div class="planet-details__item"><p>gravity</p> <span>{{planetData.planet.gravity}}</span></div>
+    <div class="planet-details__item"><p>terrain</p> <span>{{planetData.planet.terrain}}</span></div>
+    <div class="planet-details__item"><p>population</p> <span>{{planetData.planet.population}}</span></div>
+  </div>
+
+  <div class="resident__wrapper">
+    <div class="resident" *ngFor="let resident of planetData.residents">
+      {{resident.name}}
+    </div>
+  </div>
+
+</ng-container>

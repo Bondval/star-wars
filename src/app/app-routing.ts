@@ -1,15 +1,9 @@
-import {Routes} from '@angular/router';
-import {PlanetComponent} from './modules/dashboard/planet/planet.component';
-import {DashboardComponent} from './modules/dashboard/dashboard.component';
+import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent
-  },
-  {
-    path: 'planet/:planetId',
-    component: PlanetComponent
+    loadChildren: () => import('./modules/dashboard/dashboard.module').then(m => m.DashboardModule),
   },
   {
     path: '**',

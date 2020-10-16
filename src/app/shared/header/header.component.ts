@@ -13,7 +13,9 @@ export class HeaderComponent implements OnInit {
     private location: Location
   ) { }
 
-  toPreviousPage = () => this.location.back();
+  toPreviousPage(): void {
+    this.location.back();
+  }
 
   ngOnInit(): void {
   }

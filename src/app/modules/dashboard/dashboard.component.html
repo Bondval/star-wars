@@ -1,2 +1,10 @@
 <app-header></app-header>
-<div [routerLink]="'planet/123'">item</div>
+
+<div class="planets">
+  <div *ngFor="let planet of (planets$ | async)" class="planets__item" (click)="onDetailInfo(planet.url)">
+    {{planet.name}}
+    {{planet.climate}}
+    {{planet.population}}
+  </div>
+</div>
+

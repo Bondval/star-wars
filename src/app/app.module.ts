@@ -5,19 +5,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { RouterModule } from '@angular/router';
 import { routes } from './app-routing';
-import { PlanetComponent } from './modules/dashboard/planet/planet.component';
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    PlanetComponent,
-    DashboardComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
     CoreModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})
   ],
   providers: [],
