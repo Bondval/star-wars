@@ -15,4 +15,5 @@ export interface Person {
   url: string;
   created: string;
   edited: string;
+  isOpenDetails?: boolean;
 }
