@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Planet} from '../../core/models /planet';
 import {interval} from 'rxjs';
 import {tap} from 'rxjs/operators';
@@ -6,7 +6,8 @@ import {tap} from 'rxjs/operators';
 @Component({
   selector: 'app-sphere',
   templateUrl: './sphere.component.html',
-  styleUrls: ['./sphere.component.scss']
+  styleUrls: ['./sphere.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SphereComponent implements OnInit, AfterViewInit {
   @ViewChild('clouds') clouds;
@@ -19,8 +20,8 @@ export class SphereComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const orbitalPeriod = !this.planet.orbital_period || this.planet.orbital_period === 'unknown' ? 0.8 :
-      +this.planet.orbital_period / 2000;
+    const orbitalPeriod = !this.planet.orbital_period || this.planet.orbital_period === 'unknown' || this.planet.orbital_period === '0'
+      ? 0.8 : +this.planet.orbital_period / 2000;
     interval(50).pipe(tap((changesPerSecond) => {
       this.cloudsAnimation(changesPerSecond, orbitalPeriod);
       this.backgroundAnimation(changesPerSecond, orbitalPeriod);

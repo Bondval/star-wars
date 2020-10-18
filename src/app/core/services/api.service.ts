@@ -47,7 +47,7 @@ export class ApiService {
 
   private handleError = (error: any) => {
     if (error.status) {
-      alert('error'); // TODO
+      console.log('error'); // TODO
     }
     return throwError(error);
   }

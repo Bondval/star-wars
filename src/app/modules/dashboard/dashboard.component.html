@@ -1,13 +1,24 @@
-<app-header [maxPageNumber]="dashboardService.maxPageNumber" [nextPage]="dashboardService.nextPage"></app-header>
+<app-header [maxPageNumber]="dashboardService.maxPageNumber" [nextPage]="dashboardService.currentPage"></app-header>
 
-<div class="dashboard" >
-  <div class="planets">
+<div class="dashboard">
+  <a class="planets">
     <app-sphere #planets
       [planet]="planet"
-      *ngFor="let planet of dashboardService.planetsData"
+      *ngFor="let planet of dashboardService.planetsData" (keyup.enter)="onDetailInfo(planet.url)"
       (click)="onDetailInfo(planet.url)">
     </app-sphere>
-  </div>
+  </a>
 
-  <button class="load-more" *ngIf="dashboardService.nextPage" (click)="loadMore()">Load more</button>
+  <ng-container *ngIf="!dashboardService.isLoading else loading">
+    <button class="load-more" *ngIf="dashboardService.nextPage else noPages" (keyup.enter)="loadMore()" (click)="loadMore()">Load more</button>
+
+    <ng-template #noPages>
+      <p class="no-more-planet">These are all planets in the galaxy</p>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #loading>
+      <p>loading</p>
+  </ng-template>
+
 </div>

@@ -6,6 +6,8 @@
 
 .planets{
   display: flex;
+  margin: 0 auto;
+  width: 700px;
   justify-content: flex-start;
   flex-wrap: wrap;
   //&__item{
@@ -30,5 +32,17 @@
   &:hover, &:focus{
     color: #00041B;
     background: white;
+  }
+}
+
+.no-more-planet{
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
+
+@media screen and (max-width: 968px) {
+  .planets{
+    width: 350px;
   }
 }

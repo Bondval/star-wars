@@ -16,6 +16,12 @@
     &:hover{
       opacity: 0.7;
     }
+    &_empty{
+      cursor: auto;
+      &:hover{
+        opacity: 1;
+      }
+    }
   }
   &__details{
     padding: 12px 12px 0 12px;

@@ -1,4 +1,4 @@
-$size: 200px;
+$size: 250px;
 :host {
   width: $size;
   position: relative;
@@ -7,6 +7,7 @@ $size: 200px;
 }
 
 .planet {
+  cursor: pointer;
   width: $size;
   height: $size;
   position: relative;
@@ -34,6 +35,15 @@ $size: 200px;
     position: absolute;
     &_name{
       font-size: 24px;
+    }
+    &_climate{
+      display: flex;
+      align-items: center;
+    }
+    &_population{
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
     }
   }
 

@@ -12,9 +12,9 @@ import {Replacement} from 'tslint';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit, AfterContentInit, AfterViewInit, OnDestroy {
+export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   private ngUnsubscribe: ReplaySubject<number> = new ReplaySubject<number>(1);
   @ViewChildren('planets') planets: QueryList<any>;
   private scrollPosition: [number, number];
@@ -38,21 +38,8 @@ export class DashboardComponent implements OnInit, AfterContentInit, AfterViewIn
     });
   }
 
-  ngAfterContentInit(): void {
-    // console.log(this.dashboard);
-    // this.dashboard.nativeElement.scrollTop = this.scrollPosition;
-    // this.viewportScroller.scrollToPosition(this.scrollPosition);
-  }
-
   ngAfterViewInit(): void {
-    // console.log(this.dashboard);
-    // console.log(this.scrollPosition);
-    this.viewportScroller.scrollToPosition(this.scrollPosition);
-    // console.log(this.scrollPosition);
-    // this.planets.changes.subscribe(t => {
-    //   console.log('changed');
-    //   this.viewportScroller.scrollToPosition(this.scrollPosition);
-    // });
+    setTimeout(() => this.viewportScroller.scrollToPosition(this.scrollPosition), 0);
   }
 
   ngOnInit(): void {
@@ -63,18 +50,17 @@ export class DashboardComponent implements OnInit, AfterContentInit, AfterViewIn
       const planetId = planetUrl.match('/planets/(.*)/')[1];
       await this.router.navigate(['planet/' + planetId]);
     } else {
-      this.snackBar.open("planet wasn't found", 'Error', {
+      this.snackBar.open("Something went wrong. Planet wasn't found", 'Error', {
         duration: 2000
       });
     }
   }
 
   public loadMore(): void {
-    console.log('loadMore');
     this.dashboardService.loadNextPage();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
