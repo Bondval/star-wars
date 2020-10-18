@@ -1,0 +1,12 @@
+<div class="planet" tabindex="0">
+  <div class="planet__info">
+    <p class="planet__info_name">{{planet.name}}</p>
+    <div class="planet__info_climate"><mat-icon>ac_unit</mat-icon> {{planet.climate}}</div>
+    <div class="planet__info_population"><mat-icon>face</mat-icon> {{planet.population}}</div>
+  </div>
+  <div class="planet__wrap">
+    <div #background class="planet__background"></div>
+    <div #clouds class="planet__clouds"></div>
+  </div>
+  <div class="planet__mask"></div>
+</div>

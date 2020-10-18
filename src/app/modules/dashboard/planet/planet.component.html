@@ -1,0 +1,36 @@
+<app-header [isBackButton]="true"></app-header>
+<div class="planet">
+  <ng-container *ngIf="(planetData$ | async) as planetData else loading">
+    <div class="planet-details">
+      <div class="planet-details__item"><p>name:</p> <span>{{planetData.planet.name}}</span></div>
+      <div class="planet-details__item"><p>rotation period:</p> <span>{{planetData.planet.rotation_period}}</span></div>
+      <div class="planet-details__item"><p>diameter:</p> <span>{{planetData.planet.diameter}}</span></div>
+      <div class="planet-details__item"><p>climate:</p> <span>{{planetData.planet.climate}}</span></div>
+      <div class="planet-details__item"><p>gravity:</p> <span>{{planetData.planet.gravity}}</span></div>
+      <div class="planet-details__item"><p>terrain:</p> <span>{{planetData.planet.terrain}}</span></div>
+      <div class="planet-details__item"><p>population:</p> <span>{{planetData.planet.population}}</span></div>
+    </div>
+
+    <div *ngFor="let resident of planetData.residents" class="resident">
+      <div class="resident__main" tabindex="0" (click)="resident.isOpenDetails = !resident.isOpenDetails"
+           (keyup.enter)="resident.isOpenDetails = !resident.isOpenDetails">
+        {{resident.name}}
+      </div>
+      <div class="resident__details" *ngIf="resident.isOpenDetails">
+        <div class="resident__details__item"><p>name:</p> <span>{{resident.name}}</span></div>
+        <div class="resident__details__item"><p>height:</p> <span>{{resident.height}}</span></div>
+        <div class="resident__details__item"><p>mass:</p> <span>{{resident.mass}}</span></div>
+        <div class="resident__details__item"><p>gender:</p> <span>{{resident.gender}}</span></div>
+      </div>
+    </div>
+
+    <div class="resident" *ngIf="!planetData.residents.length">
+      <div class="resident__main resident__main_empty">This planet doesn't have residents</div>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <app-loader *ngIf="!(loadingError$ | async)"></app-loader>
+  </ng-template>
+</div>
+

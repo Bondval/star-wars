@@ -1,0 +1,30 @@
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  z-index: 100;
+  &__page-info{
+    margin-bottom: 0;
+  }
+}
+
+.name-box{
+  display: flex;
+  align-items: center;
+  &__back{
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    width: 40px;
+  }
+  &__name{
+
+  }
+}
+
+.mat-toolbar.mat-primary{
+  background: transparent;
+}
+

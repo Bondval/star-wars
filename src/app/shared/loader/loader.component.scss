@@ -1,0 +1,35 @@
+$size: 50px;
+
+.planet {
+  position: relative;
+  margin: 0 auto;
+  cursor: pointer;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 60px -20px rgba(255, 189, 3, 0.72), -14px -15px 40px -10px rgba(255, 238, 191, 0.23);
+  &__background {
+    //animation: translateBackground 300s infinite linear;
+    background: url('/assets/img/mars.jpg') repeat-x;
+    width: $size;
+    height: $size;
+    position: absolute;
+    border-radius: 50%;
+    animation: rotatePlanet 0.4s infinite linear;
+  }
+
+  &__wrap{
+    width: 100%;
+  }
+
+  @keyframes rotatePlanet {
+    0% {
+      transform: rotateZ(0);
+    }
+    100% {
+      transform: rotateZ(-360deg);
+    }
+  }
+
+}

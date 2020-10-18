@@ -1,0 +1,94 @@
+$size: 250px;
+:host {
+  width: $size;
+  position: relative;
+  height: $size;
+  margin: 25px 50px;
+}
+
+.planet {
+  cursor: pointer;
+  width: $size;
+  height: $size;
+  position: relative;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 0 60px -20px rgba(255, 189, 3, 0.72), -14px -15px 40px -10px rgba(255, 238, 191, 0.23);
+  &__background {
+    //animation: translateBackground 300s infinite linear;
+    background: url('/assets/img/mars.jpg') repeat-x;
+    width: $size;
+    height: $size;
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  &__info{
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    &_name{
+      font-size: 24px;
+    }
+    &_climate{
+      display: flex;
+      align-items: center;
+    }
+    &_population{
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  &__mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    box-shadow: inset -10px -10px 40px #251303, inset 10px 10px 30px -10px rgba(255, 204, 159, 0.6);
+    border-radius: 50%;
+  }
+
+  &__clouds {
+    background: url('/assets/img/clouds.png') repeat-x;
+    width: $size;
+    height: $size;
+    position: absolute;
+    border-radius: 50%;
+    //animation: translateBackground 200s infinite linear;
+    opacity: 0.4;
+  }
+
+  &__wrap {
+    width: $size;
+    height: $size;
+    position: absolute;
+    border-radius: 50%;
+    //animation: rotatePlanet 150s infinite linear;
+  }
+}
+
+
+@keyframes translateBackground {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: -600px;
+  }
+}
+
+@keyframes rotatePlanet {
+  0% {
+    transform: rotateZ(0);
+  }
+  100% {
+    transform: rotateZ(-360deg);
+  }
+}
