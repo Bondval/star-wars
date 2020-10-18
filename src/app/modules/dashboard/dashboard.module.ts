@@ -3,9 +3,13 @@ import { CommonModule } from '@angular/common';
 import {StarWarsApiService} from './services/star-wars-api.service';
 import {RouterModule} from '@angular/router';
 import {PlanetComponent} from './planet/planet.component';
-import {CoreModule} from '../../core/core.module';
 import {DashboardComponent} from './dashboard.component';
 import {HeaderModule} from '../../shared/header/header.module';
+import {SphereModule} from '../../shared/sphere/sphere.module';
+import {MatButtonModule} from '@angular/material/button';
+import {DashboardService} from './services/dashboard.service';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -15,6 +19,9 @@ import {HeaderModule} from '../../shared/header/header.module';
   imports: [
     CommonModule,
     HeaderModule,
+    SphereModule,
+    MatButtonModule,
+    MatSnackBarModule,
     RouterModule.forChild([
         {
           path: '',
@@ -28,7 +35,8 @@ import {HeaderModule} from '../../shared/header/header.module';
     )
   ],
   providers: [
-    StarWarsApiService
+    StarWarsApiService,
+    DashboardService
   ]
 })
 export class DashboardModule { }

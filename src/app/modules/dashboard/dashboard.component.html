@@ -1,10 +1,13 @@
-<app-header></app-header>
+<app-header [maxPageNumber]="dashboardService.maxPageNumber" [nextPage]="dashboardService.nextPage"></app-header>
 
-<div class="planets">
-  <div *ngFor="let planet of (planets$ | async)" class="planets__item" (click)="onDetailInfo(planet.url)">
-    {{planet.name}}
-    {{planet.climate}}
-    {{planet.population}}
+<div class="dashboard" >
+  <div class="planets">
+    <app-sphere #planets
+      [planet]="planet"
+      *ngFor="let planet of dashboardService.planetsData"
+      (click)="onDetailInfo(planet.url)">
+    </app-sphere>
   </div>
-</div>
 
+  <button class="load-more" *ngIf="dashboardService.nextPage" (click)="loadMore()">Load more</button>
+</div>

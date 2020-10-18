@@ -8,6 +8,8 @@ import { Location } from '@angular/common';
 })
 export class HeaderComponent implements OnInit {
   @Input() isBackButton = false;
+  @Input() maxPageNumber: number;
+  @Input() nextPage: string;
 
   constructor(
     private location: Location

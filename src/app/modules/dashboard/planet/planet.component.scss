@@ -38,11 +38,10 @@
 }
 
 .planet{
-  padding: 40px 0;
+  padding: 90px 0 40px;
   color: white;
-  background: url("/assets/img/space.jpg"), white;
-  background-size: cover;
-  min-height: calc(100vh - 64px - 80px); // 100view height - 64px header - 80px padding top and bottom;
+  background: url("/assets/img/space.jpg") repeat white;
+  min-height: calc(100vh - 130px); // 100view height - 130px padding top and bottom;
 }
 
 .planet-details{

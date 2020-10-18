@@ -4,6 +4,13 @@ import {Injectable} from '@angular/core';
 import {Person} from '../../../core/models /people';
 import {Planet} from '../../../core/models /planet';
 
+export interface PlanetResponse {
+  count: number;
+  next: string;
+  previous: string;
+  results: Planet[];
+}
+
 @Injectable()
 export class StarWarsApiService {
 
@@ -11,8 +18,8 @@ export class StarWarsApiService {
     private apiService: ApiService,
   ) { }
 
-  public getPlanets(): Observable<Planet[]> {
-    return this.apiService.get('planets');
+  public getPlanets(planetsUrl?: string): Observable<PlanetResponse> {
+    return this.apiService.get(planetsUrl ? planetsUrl : `planets?page=1`);
   }
 
   public getPlanet(id: string): Observable<Planet> {

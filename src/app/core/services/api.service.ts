@@ -5,14 +5,6 @@ import {Observable, throwError} from 'rxjs';
 import {share, catchError, shareReplay} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
 
-interface ApiResponse {
-  error: boolean;
-  data: any;
-  message: string;
-  errors: any;
-  popup: Array<any>;
-}
-
 @Injectable()
 export class ApiService {
 
@@ -23,7 +15,7 @@ export class ApiService {
   }
 
   public get(path: string, params?: any, headers?: any): Observable<any> {
-    return this.http.get<ApiResponse>(path.includes('swapi.dev') ? path : `${environment.api_url}${path}`, {params, headers})
+    return this.http.get(path.includes('swapi.dev') ? path : `${environment.api_url}${path}`, {params, headers})
       .pipe(
         shareReplay(),
         catchError((error: any) => this.handleError(error))
@@ -32,25 +24,25 @@ export class ApiService {
 
   public post(path: string, params?: any, options?: any): Observable<any> {
     const requestParams = Object.assign({}, params);
-    return this.http.post<ApiResponse>(`${environment.api_url}${path}`, requestParams, options);
+    return this.http.post(`${environment.api_url}${path}`, requestParams, options);
   }
 
   public postFormData(path: string, formData: FormData, options?: any): Observable<any> {
-    return this.http.post<ApiResponse>(`${environment.api_url}${path}`, formData, options);
+    return this.http.post(`${environment.api_url}${path}`, formData, options);
   }
 
   public put(path: string, params?: any): Observable<any> {
     const requestParams = Object.assign({}, params);
-    return this.http.put<ApiResponse>(`${environment.api_url}${path}`, requestParams);
+    return this.http.put(`${environment.api_url}${path}`, requestParams);
   }
 
   public patch(path: string, params?: any): Observable<any> {
     const requestParams = Object.assign({}, params);
-    return this.http.patch<ApiResponse>(`${environment.api_url}${path}`, requestParams);
+    return this.http.patch(`${environment.api_url}${path}`, requestParams);
   }
 
   public delete(path: string): Observable<any> {
-    return this.http.delete<ApiResponse>(`${environment.api_url}${path}`);
+    return this.http.delete(`${environment.api_url}${path}`);
   }
 
   private handleError = (error: any) => {
