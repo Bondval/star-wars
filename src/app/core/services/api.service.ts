@@ -2,14 +2,16 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable, throwError} from 'rxjs';
-import {share, catchError, shareReplay} from 'rxjs/operators';
+import {catchError, shareReplay} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable()
 export class ApiService {
 
   constructor(
     private http: HttpClient,
+    private readonly snackBar: MatSnackBar,
     private router: Router,
   ) {
   }
@@ -46,8 +48,10 @@ export class ApiService {
   }
 
   private handleError = (error: any) => {
-    if (error.status) {
-      console.log('error'); // TODO
+    if (error) {
+      this.snackBar.open('Something went wrong. Please try again later', 'Error', {
+        duration: 2500
+      });
     }
     return throwError(error);
   }

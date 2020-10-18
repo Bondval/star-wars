@@ -1,6 +1,6 @@
 <app-header [isBackButton]="true"></app-header>
 <div class="planet">
-  <ng-container *ngIf="planetData$ | async as planetData">
+  <ng-container *ngIf="(planetData$ | async) as planetData else loading">
     <div class="planet-details">
       <div class="planet-details__item"><p>name:</p> <span>{{planetData.planet.name}}</span></div>
       <div class="planet-details__item"><p>rotation period:</p> <span>{{planetData.planet.rotation_period}}</span></div>
@@ -28,5 +28,9 @@
       <div class="resident__main resident__main_empty">This planet doesn't have residents</div>
     </div>
   </ng-container>
+
+  <ng-template #loading>
+    <app-loader *ngIf="!(loadingError$ | async)"></app-loader>
+  </ng-template>
 </div>
 

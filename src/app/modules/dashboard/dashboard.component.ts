@@ -1,10 +1,10 @@
 import {AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import { PlanetResponse, StarWarsApiService } from './services/star-wars-api.service';
 import { Planet} from '../../core/models /planet';
-import {Observable, ReplaySubject} from 'rxjs';
+import {interval, Observable, ReplaySubject} from 'rxjs';
 import {Router, Scroll} from '@angular/router';
 import {DashboardService} from './services/dashboard.service';
-import {distinctUntilKeyChanged, filter, map, takeUntil} from 'rxjs/operators';
+import {distinctUntilKeyChanged, filter, map, takeUntil, tap} from 'rxjs/operators';
 import {ViewportScroller} from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Replacement} from 'tslint';
@@ -16,7 +16,7 @@ import {Replacement} from 'tslint';
 })
 export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   private ngUnsubscribe: ReplaySubject<number> = new ReplaySubject<number>(1);
-  @ViewChildren('planets') planets: QueryList<any>;
+  @ViewChild('background') background;
   private scrollPosition: [number, number];
 
   constructor(
@@ -39,14 +39,21 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => this.viewportScroller.scrollToPosition(this.scrollPosition), 0);
+    this.viewportScroller.scrollToPosition([this.scrollPosition[0], this.scrollPosition[1] + 1100]);
+
+    interval(50).pipe(
+      tap((changesPerSecond) => {
+        this.backgroundAnimation(changesPerSecond);
+      }),
+      takeUntil(this.ngUnsubscribe)
+    ).subscribe();
   }
 
   ngOnInit(): void {
   }
 
   async onDetailInfo(planetUrl: string): Promise<void> {
-    if  (planetUrl) {
+    if (planetUrl) {
       const planetId = planetUrl.match('/planets/(.*)/')[1];
       await this.router.navigate(['planet/' + planetId]);
     } else {
@@ -58,6 +65,11 @@ export class DashboardComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public loadMore(): void {
     this.dashboardService.loadNextPage();
+  }
+
+  private backgroundAnimation(changesPerSecond: number): void {
+    this.background.nativeElement.style.backgroundPositionY = changesPerSecond / 2 + 'px';
+    this.background.nativeElement.style.backgroundPositionX = -(changesPerSecond / 4) + 'px';
   }
 
   ngOnDestroy(): void {

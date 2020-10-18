@@ -16,7 +16,7 @@ $size: 250px;
   box-shadow: 0 0 60px -20px rgba(255, 189, 3, 0.72), -14px -15px 40px -10px rgba(255, 238, 191, 0.23);
   &__background {
     //animation: translateBackground 300s infinite linear;
-    background: url(http://artem.anmedio.ru/dev/planet/mars.jpg) repeat-x;
+    background: url('/assets/img/mars.jpg') repeat-x;
     width: $size;
     height: $size;
     position: absolute;
@@ -56,7 +56,7 @@ $size: 250px;
   }
 
   &__clouds {
-    background: url(http://artem.anmedio.ru/dev/planet/clouds.png) repeat-x;
+    background: url('/assets/img/clouds.png') repeat-x;
     width: $size;
     height: $size;
     position: absolute;

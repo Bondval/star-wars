@@ -9,7 +9,8 @@ import {SphereModule} from '../../shared/sphere/sphere.module';
 import {MatButtonModule} from '@angular/material/button';
 import {DashboardService} from './services/dashboard.service';
 import {ScrollingModule} from '@angular/cdk/scrolling';
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {LoaderModule} from '../../shared/loader/loader.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
     SphereModule,
     MatButtonModule,
     MatSnackBarModule,
+    LoaderModule,
     RouterModule.forChild([
         {
           path: '',

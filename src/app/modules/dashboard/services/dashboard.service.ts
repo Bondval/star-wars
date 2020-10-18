@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
-import {map, switchMap, takeUntil} from 'rxjs/operators';
+import {BehaviorSubject, Observable, of, ReplaySubject, throwError} from 'rxjs';
+import {catchError, map, mapTo, switchMap, takeUntil, tap} from 'rxjs/operators';
 import {PlanetResponse, StarWarsApiService} from './star-wars-api.service';
 import {Planet} from '../../../core/models /planet';
 
@@ -19,7 +19,12 @@ export class DashboardService implements OnDestroy{
     this.planets.pipe(
       switchMap((type: string) => {
         const pageUrl = type === 'next' && this.nextPage ? this.nextPage : '';
-        return this.getPlanets(pageUrl);
+        return this.getPlanets(pageUrl).pipe(
+          catchError((e) => {
+            this.isLoading = false;
+            return of(e);
+          }),
+        );
       }),
       takeUntil(this.ngUnsubscribe)
     ).subscribe(() => this.isLoading = false);

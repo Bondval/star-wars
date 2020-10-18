@@ -19,7 +19,7 @@ export class StarWarsApiService {
   ) { }
 
   public getPlanets(planetsUrl?: string): Observable<PlanetResponse> {
-    return this.apiService.get(planetsUrl ? planetsUrl : `planets?page=1`);
+    return this.apiService.get(planetsUrl ?  `planets?page=${+(new URL(planetsUrl).searchParams.get('page'))}` : `planets?page=1`);
   }
 
   public getPlanet(id: string): Observable<Planet> {

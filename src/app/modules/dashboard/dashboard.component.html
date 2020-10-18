@@ -1,11 +1,18 @@
 <app-header [maxPageNumber]="dashboardService.maxPageNumber" [nextPage]="dashboardService.currentPage"></app-header>
 
-<div class="dashboard">
+<div class="dashboard" #background>
   <a class="planets">
-    <app-sphere #planets
-      [planet]="planet"
-      *ngFor="let planet of dashboardService.planetsData" (keyup.enter)="onDetailInfo(planet.url)"
-      (click)="onDetailInfo(planet.url)">
+<!--    <cdk-virtual-scroll-viewport style="width: 100vw; height: 100vh" [itemSize]="100">-->
+<!--      <ng-container *cdkVirtualFor="let planet of dashboardService.planetsData">-->
+<!--        <app-sphere [planet]="planet"-->
+<!--                    (keyup.enter)="onDetailInfo(planet.url)"-->
+<!--                    (click)="onDetailInfo(planet.url)">-->
+<!--        </app-sphere>-->
+<!--      </ng-container>-->
+<!--    </cdk-virtual-scroll-viewport>-->
+    <app-sphere [planet]="planet"
+                *ngFor="let planet of dashboardService.planetsData" (keyup.enter)="onDetailInfo(planet.url)"
+                (click)="onDetailInfo(planet.url)">
     </app-sphere>
   </a>
 
@@ -18,7 +25,7 @@
   </ng-container>
 
   <ng-template #loading>
-      <p>loading</p>
+    <app-loader></app-loader>
   </ng-template>
 
 </div>
